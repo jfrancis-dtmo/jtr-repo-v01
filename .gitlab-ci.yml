@@ -1,0 +1,26 @@
+stages:
+  - test
+  - deploy
+
+# 1. Test Stage: Validate the Markdown before publishing
+validate_markdown:
+  stage: test
+  image: pipelinecomponents/markdownlint:latest
+  script:
+    - mdl .  # Scans all Markdown files for formatting errors
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+# 2. Deploy Stage: Build and publish the official site
+pages:
+  stage: deploy
+  image: squidfunk/mkdocs-material:latest
+  script:
+    # This command converts your Markdown into a styled HTML website
+    - mkdocs build --clean --site-dir public
+  artifacts:
+    paths:
+      - public  # Saves the generated website files
+  rules:
+    # Only run this publishing step when changes are merged into the main policy branch
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
