@@ -1,0 +1,41 @@
+# --- Site Information ---
+site_name: Department of Defense - Joint Travel Regulations
+site_description: Official online portal for the DoD travel policy.
+site_author: Defense Travel Management Office
+site_url: https://travel.dod.mil/policy
+
+# --- Branding and Theme ---
+theme:
+  name: material
+  logo: assets/images/dow-official-seal.png
+  favicon: assets/images/dow-official-seal.png
+  palette:
+    primary: navy       # Standard DoD/DoW Blue
+    accent: amber       # Highlight color for links and buttons
+  font:
+    text: Roboto        # Clean, accessible font for reading policy
+    code: Roboto Mono
+
+# --- Plugins (Automated Features) ---
+plugins:
+  - search              # Automatically builds a search bar for the whole site
+  - with-pdf:           # Automatically generates the archival PDF upon merge
+      output_path: "DoD_JTR_Archive.pdf"
+      cover_title: "Joint Travel Regulations"
+      cover_subtitle: "UNIFORMED SERVICE MEMBERS AND DOD CIVILIAN EMPLOYEES"
+
+# --- Markdown Upgrades ---
+markdown_extensions:
+  - admonition          # Allows the use of shaded warning/note boxes
+  - tables              # Enables the precise pipe tables you saw earlier
+  - toc:
+      permalink: true   # Adds a clickable anchor link to every header
+
+# --- Table of Contents (Navigation) ---
+nav:
+  - "Introduction": index.md
+  - "Chapter 1: General Policy": 01-general-policy.md
+  - "Chapter 2: Standard Travel Allowances": 02-standard-travel.md
+  - "Appendices":
+      - "Appendix A: Definitions": appendices/A-definitions.md
+      - "Appendix B: Rates": appendices/B-rates.md
